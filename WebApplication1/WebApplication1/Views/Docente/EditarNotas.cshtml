@@ -1,0 +1,86 @@
+﻿@model WebApplication1.Models.EditarNotasViewModel
+
+@{
+    ViewData["Title"] = "Editar notas del alumno";
+}
+
+<div class="container mt-5 mb-5">
+    <h2 class="mb-3">Editar notas del alumno</h2>
+
+    <a asp-controller="Docente" asp-action="Alumnos" class="btn btn-link mb-3">
+        ← Volver al listado de alumnos
+    </a>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Mensaje"]
+        </div>
+    }
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4 class="card-title mb-3">@Model.NombreCompleto</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-1"><strong>Carne:</strong> @Model.Carne</p>
+                    <p class="mb-1"><strong>Grado y sección:</strong> @Model.GradoSeccion</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-1"><strong>Especialidad:</strong> @Model.Especialidad</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form asp-action="EditarNotas" method="post">
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" asp-for="AlumnoId" />
+
+        <div class="card">
+            <div class="card-header">
+                <strong>Notas por materia</strong>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Materia</th>
+                                <th class="text-center">Parcial 1</th>
+                                <th class="text-center">Parcial 2</th>
+                                <th class="text-center">Nota Final</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Notas.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Model.Notas[i].Materia
+                                        <input type="hidden" asp-for="Notas[i].NotaId" />
+                                    </td>
+                                    <td class="text-center" style="max-width:120px;">
+                                        <input asp-for="Notas[i].Parcial1" class="form-control form-control-sm text-center" />
+                                    </td>
+                                    <td class="text-center" style="max-width:120px;">
+                                        <input asp-for="Notas[i].Parcial2" class="form-control form-control-sm text-center" />
+                                    </td>
+                                    <td class="text-center" style="max-width:120px;">
+                                        <input asp-for="Notas[i].NotaFinal" class="form-control form-control-sm text-center" />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer text-end">
+                <button type="submit" class="btn btn-success">
+                    Guardar cambios
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

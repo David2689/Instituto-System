@@ -1,0 +1,41 @@
+﻿@model WebApplication1.Models.Alumno
+
+@{
+    ViewData["Title"] = "Crear alumno";
+}
+
+<div class="container mt-5 mb-5">
+    <h2 class="mb-3">Crear nuevo alumno</h2>
+
+    <a asp-controller="Docente" asp-action="Alumnos" class="btn btn-link mb-3">
+        ← Volver al listado de alumnos
+    </a>
+
+    <form asp-action="CrearAlumno" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label asp-for="Carne" class="form-label"></label>
+            <input asp-for="Carne" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="NombreCompleto" class="form-label"></label>
+            <input asp-for="NombreCompleto" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Especialidad" class="form-label"></label>
+            <input asp-for="Especialidad" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="GradoSeccion" class="form-label"></label>
+            <input asp-for="GradoSeccion" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Guardar alumno
+        </button>
+    </form>
+</div>

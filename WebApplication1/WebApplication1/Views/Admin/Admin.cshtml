@@ -1,0 +1,17 @@
+﻿@* Views/Admin/Index.cshtml *@
+@{
+    ViewData["Title"] = "Panel administrativo";
+}
+
+<h2>Panel administrativo</h2>
+<p>Seleccione una opción:</p>
+
+<ul>
+    <li><a asp-controller="Admin" asp-action="Alumnos">Alumnos</a></li>
+    <li><a asp-controller="Admin" asp-action="Docentes">Docentes</a></li>
+    <li><a asp-controller="Admin" asp-action="Materias">Materias</a></li>
+    <li><a asp-controller="Admin" asp-action="Especialidades">Especialidades</a></li>
+    <li><a asp-controller="Admin" asp-action="Secciones">Secciones</a></li>
+    <li><a asp-controller="Admin" asp-action="Anios">Años académicos</a></li>
+    <li><a asp-controller="Admin" asp-action="Usuarios">Usuarios del sistema</a></li>
+</ul>

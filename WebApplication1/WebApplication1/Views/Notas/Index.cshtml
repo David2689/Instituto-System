@@ -1,0 +1,114 @@
+﻿@model WebApplication1.Models.AlumnoNotasViewModel
+@using WebApplication1.Models
+
+@{
+    var alumnos = ViewBag.Alumnos as List<Alumno>;
+    int alumnoSeleccionadoId = ViewBag.AlumnoSeleccionadoId ?? 0;
+}
+
+<h2>Registro de notas del alumno</h2>
+
+<form asp-controller="Notas" asp-action="Index" method="get">
+    <label for="idAlumno"><strong>Seleccione el alumno:</strong></label>
+    <select id="idAlumno" name="idAlumno">
+        @if (alumnos != null)
+        {
+            foreach (var a in alumnos)
+            {
+                if (a.Id == alumnoSeleccionadoId)
+                {
+                    <option value="@a.Id" selected="selected">
+                        @a.Carne - @a.NombreCompleto
+                    </option>
+                }
+                else
+                {
+                    <option value="@a.Id">
+                        @a.Carne - @a.NombreCompleto
+                    </option>
+                }
+            }
+        }
+    </select>
+
+    <button type="submit">Ver notas</button>
+</form>
+
+<hr />
+
+@{
+    ViewData["Title"] = "Apartado de notas";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2 class="mb-2">Registro de notas del alumno</h2>
+            <p class="text-muted mb-1">
+                Aquí se muestran las calificaciones registradas de forma transparente.
+            </p>
+        </div>
+        <div class="col-md-4 text-md-end text-center">
+            @* Si quieres puedes usar una imagen del proyecto como icono de notas *@
+            <!-- <img src="~/img/4.png" alt="Notas" style="max-height:120px;" /> -->
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title mb-3">@Model.NombreCompleto</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-1"><strong>Carne:</strong> @Model.Carne</p>
+                    <p class="mb-1"><strong>Grado y sección:</strong> @Model.GradoSeccion</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-1"><strong>Especialidad:</strong> @Model.Especialidad</p>
+                    <p class="mb-1"><strong>Año académico:</strong> 2025</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <strong>Detalle de notas por materia</strong>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Materia</th>
+                            <th class="text-center">Parcial 1</th>
+                            <th class="text-center">Parcial 2</th>
+                            <th class="text-center">Nota Final</th>
+                            <th class="text-center">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var n in Model.Notas)
+                        {
+                            <tr>
+                                <td>@n.Materia</td>
+                                <td class="text-center">@n.Parcial1</td>
+                                <td class="text-center">@n.Parcial2</td>
+                                <td class="text-center">@n.NotaFinal</td>
+                                <td class="text-center">
+                                    @if (n.Aprobado)
+                                    {
+                                        <span class="badge bg-success">Aprobado</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">Reprobado</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

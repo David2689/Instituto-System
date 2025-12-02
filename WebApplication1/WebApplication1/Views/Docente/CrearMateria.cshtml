@@ -1,0 +1,31 @@
+﻿@model WebApplication1.Models.Materia
+
+@{
+    ViewData["Title"] = "Crear materia";
+}
+
+<div class="container mt-5 mb-5">
+    <h2 class="mb-3">Crear nueva materia</h2>
+
+    <a asp-controller="Docente" asp-action="Materias" class="btn btn-link mb-3">
+        ← Volver a materias
+    </a>
+
+    <form asp-action="CrearMateria" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label asp-for="Nombre" class="form-label"></label>
+            <input asp-for="Nombre" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="UnidadesValorativas" class="form-label"></label>
+            <input asp-for="UnidadesValorativas" class="form-control" type="number" />
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Guardar materia
+        </button>
+    </form>
+</div>

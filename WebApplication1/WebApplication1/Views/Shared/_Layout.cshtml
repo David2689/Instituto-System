@@ -1,0 +1,587 @@
+﻿@* Views/Home/Index.cshtml *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instituto Nacional De Usulután</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/img/hero-banner.png" type="image/png" />
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="~/css/style.css" />
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet" />
+
+    <!-- preload images -->
+    <link rel="preload" as="image" href="/img/hero-banner.png" />
+    <link rel="preload"
+          as="image"
+          href="/img/hero-abs-1.png"
+          media="(min-width:768px)" />
+    <link rel="preload"
+          as="image"
+          href="/img/hero-abs-2.png"
+          media="(min-width:768px)" />
+</head>
+
+<body id="top">
+    <!-- #HEADER -->
+    <header class="header" data-header>
+        <div class="container">
+            <h1>
+                <a href="#" class="logo">Instituto Nacional De Usulután</a>
+            </h1>
+
+            <nav class="navbar" data-navbar>
+                <div class="navbar-top">
+                    <a href="#" class="logo">Nouman School</a>
+
+                    <button class="nav-close-btn"
+                            aria-label="Close menu"
+                            data-nav-toggler>
+                        <ion-icon name="close-outline"></ion-icon>
+                    </button>
+                </div>
+
+                <ul class="navbar-list">
+
+                    <li class="navbar-item">
+                        <a href="#home" class="navbar-link" data-nav-toggler>Inicio</a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a asp-controller="Notas" asp-action="Index" class="navbar-link" data-nav-toggler>
+                            Apartado de notas
+                        </a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a href="#classes" class="navbar-link" data-nav-toggler>Especialidades</a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a href="#tuition" class="navbar-link" data-nav-toggler>Centro de Matricula</a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a asp-controller="Account" asp-action="Login" class="navbar-link">Iniciar sesión</a>
+                    </li>
+
+                    <li><a asp-controller="Admin" asp-action="Index">Panel administrativo</a></li>
+
+                </ul>
+
+
+                <div class="header-actions">
+                    <button class="header-action-btn"
+                            aria-label="Open search"
+                            data-search-toggler>
+                        <ion-icon name="search-outline"></ion-icon>
+                    </button>
+
+                    <a href="tel:+923023207807"
+                       class="header-action-btn login-btn"
+                       target="_blank">
+                        <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+                        <span class="span">Contacto</span>
+                    </a>
+
+                    <button class="header-action-btn nav-open-btn"
+                            aria-label="Open menu"
+                            data-nav-toggler>
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                </div>
+            </nav>
+
+            <div class="overlay" data-nav-toggler data-overlay></div>
+        </div>
+    </header>
+
+    <!-- #SEARCH BOX -->
+    <div class="search-container" data-search-box>
+        <div class="container">
+            <button class="search-close-btn"
+                    aria-label="Close search"
+                    data-search-toggler>
+                <ion-icon name="close-outline"></ion-icon>
+            </button>
+
+            <div class="search-wrapper">
+                <input type="search"
+                       name="search"
+                       placeholder="Search Here..."
+                       aria-label="Search"
+                       class="search-field" />
+
+                <button class="search-submit" aria-label="Submit" data-search-toggler>
+                    <ion-icon name="search-outline"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <article>
+            <!-- #HERO -->
+            <section class="hero"
+                     id="home"
+                     aria-label="hero"
+                     style="background-image: url('/img/hero-bg.jpg')">
+                <div class="container">
+                    <div class="hero-content">
+                        <p class="section-subtitle">Impulsando mentes</p>
+
+                        <h2 class="h1 hero-title">Construyendo el Mañana.</h2>
+
+                        <p class="hero-text">
+                            En el Instituto Nacional De Usulután, nos dedicamos a moldear el
+                            futuro de nuestros estudiantes, brindándoles una educación de
+                            calidad y fomentando un ambiente de aprendizaje inspirador.
+                        </p>
+
+                        <a href="https://www.facebook.com/profile.php?id=61572024186894"
+                           class="btn btn-primary"
+                           target="_blank">
+                            <span class="span">Mira las Actividades Institucionales</span>
+                            <ion-icon name="arrow-forward-outline"
+                                      aria-hidden="true"></ion-icon>
+                        </a>
+                    </div>
+
+                    <figure class="hero-banner">
+                        <img src="/img/hero-banner.png"
+                             width="500"
+                             height="500"
+                             loading="lazy"
+                             alt="hero image"
+                             class="w-100" />
+
+                        <img src="/img/hero-abs-1.png"
+                             width="318"
+                             height="352"
+                             loading="lazy"
+                             aria-hidden="true"
+                             class="abs-img abs-img-1" />
+
+                        <img src="/img/hero-abs-2.png"
+                             width="160"
+                             height="160"
+                             loading="lazy"
+                             aria-hidden="true"
+                             class="abs-img abs-img-2" />
+                    </figure>
+                </div>
+            </section>
+
+            <!-- #COURSES / ESPECIALIDADES -->
+            <section class="section course"
+                     id="classes"
+                     aria-label="course"
+                     style="background-image: url('/img/course-bg.jpg')">
+                <div class="container">
+                    <p class="section-subtitle">Explora nuestras áreas de especialización</p>
+
+                    <h2 class="h2 section-title">Las mejores especialidades para tus estudios</h2>
+
+                    <ul class="grid-list">
+                        <li>
+                            <div class="course-card">
+                                <figure class="card-banner">
+                                    <img src="/img/atencion primaria en salud.png"
+                                         width="370"
+                                         height="270"
+                                         loading="lazy"
+                                         alt="School Students"
+                                         class="img-cover" />
+                                </figure>
+
+                                <div class="card-actions">
+                                    <span class="badge">Basic</span>
+
+                                    <button class="whishlist-btn"
+                                            aria-label="Add to whishlist"
+                                            data-whish-btn>
+                                        <ion-icon name="heart"></ion-icon>
+                                    </button>
+                                </div>
+
+                                <div class="card-content">
+                                    <ul class="card-meta-list">
+                                        <li class="card-meta-item">
+                                            <ion-icon name="reader-outline"
+                                                      aria-hidden="true"></ion-icon>
+                                            <span class="card-meta-text">24 Modulos</span>
+                                        </li>
+
+                                        <li class="card-meta-item">
+                                            <ion-icon name="time-outline"
+                                                      aria-hidden="true"></ion-icon>
+                                            <time datetime="PT18H15M44S" class="card-meta-text">3 Años</time>
+                                        </li>
+                                    </ul>
+
+                                    <h3 class="h3">
+                                        <a href="#" class="card-title">Salud y Bienestar Social</a>
+                                    </h3>
+
+                                    <div class="rating-wrapper">
+                                        <div class="rating">
+                                            <ion-icon name="star"></ion-icon>
+                                            <ion-icon name="star"></ion-icon>
+                                            <ion-icon name="star"></ion-icon>
+                                            <ion-icon name="star"></ion-icon>
+                                            <ion-icon name="star"></ion-icon>
+                                        </div>
+                                        <span class="rating-text">(Reseñas de padres)</span>
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <div class="card-price">
+                                            <span class="span">Ministerio de educación</span>
+                                        </div>
+
+                                        <div class="card-meta-item">
+                                            <ion-icon name="people-outline"
+                                                      aria-hidden="true"></ion-icon>
+                                            <span class="card-meta-text"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="course-card">
+                                <figure class="card-banner">
+                                    <img src="/img/dsw.png"
+                                         width="370"
+                                         height="270"
+                                         loading="lazy"
+                                         alt="School Students"
+                                         class="img-cover" />
+                                </figure>
+
+                                <div class="card-actions">
+                                    <span class="badge">Basic</span>
+
+                                    <button class="whishlist-btn"
+                                            aria-label="Add to whishlist"
+                                            data-whish-btn>
+                                        <ion-icon name="heart"></ion-icon>
+                                    </button>
+                                </div>
+
+                                <div class="card-content">
+                                    <ul class="card-meta-list">
+                                        <li class="card-meta-item">
+                                            <ion-icon name="reader-outline"
+                                                      aria-hidden="true"></ion-icon>
+                                            <span class="card-meta-text">24 Modulos</span>
+                                        </li>
+
+                                        <li class="card-meta-item">
+                                            <ion-icon name="time-outline"
+                                                      aria-hidden="true"></ion-icon>
+                                            <time datetime="PT18H15M44S" class="card-meta-text">3 años</time>
+                                        </li>
+                                    </ul>
+
+                                    <h3 class="h3">
+                                        <a href="#" class="card-title">Desarrollo de Software</a>
+                                    </h3>
+
+                                    <div class="rating-wrapper">
+                                        <div class="rating">
+                                            <ion-icon name="star"></ion-icon>
+                                            <ion-icon name="star"></ion-icon>
+                                            <ion-icon name="star"></ion-icon>
+                                            <ion-icon name="star"></ion-icon>
+                                            <ion-icon name="star"></ion-icon>
+                                        </div>
+                                        <span class="rating-text">(Reseñas de padres)</span>
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <div class="card-price">
+                                            <span class="span">Ministerio de educación</span>
+                                        </div>
+
+                                        <div class="card-meta-item">
+                                            <ion-icon name="people-outline"
+                                                      aria-hidden="true"></ion-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="course-card">
+                                <figure class="card-banner">
+                                    <img src="/img/logistica.png"
+                                         width="370"
+                                         height="270"
+                                         loading="lazy"
+                                         alt="School Students"
+                                         class="img-cover" />
+                                </figure>
+
+                                <div class="card-actions">
+                                    <span class="badge">Basic</span>
+
+                                    <button class="whishlist-btn"
+                                            aria-label="Add to whishlist"
+                                            data-whish-btn>
+                                        <ion-icon name="heart"></ion-icon>
+                                    </button>
+                                </div>
+
+                                <div class="card-content">
+                                    <ul class="card-meta-list">
+                                        <li class="card-meta-item">
+                                            <ion-icon name="reader-outline"
+                                                      aria-hidden="true"></ion-icon>
+                                            <span class="card-meta-text">24 Modulos </span>
+                                        </li>
+
+                                        <li class="card-meta-item">
+                                            <ion-icon name="time-outline"
+                                                      aria-hidden="true"></ion-icon>
+                                            <time datetime="PT18H15M44S" class="card-meta-text">3 años</time>
+                                        </li>
+                                    </ul>
+
+                                    <h3 class="h3">
+                                        <a href="#" class="card-title">Logística Comercial y Global</a>
+                                    </h3>
+
+                                    <div class="rating-wrapper">
+                                        <div class="rating">
+                                            <ion-icon name="star"></ion-icon>
+                                            <ion-icon name="star"></ion-icon>
+                                            <ion-icon name="star"></ion-icon>
+                                            <ion-icon name="star"></ion-icon>
+                                            <ion-icon name="star"></ion-icon>
+                                        </div>
+                                        <span class="rating-text">(Reseñas de padres)</span>
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <div class="card-price">
+                                            <span class="span">Ministerio de educación</span>
+                                        </div>
+
+                                        <div class="card-meta-item">
+                                            <ion-icon name="people-outline"
+                                                      aria-hidden="true"></ion-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a href="#" class="btn btn-primary">
+                        <span class="span">Tu futuro esta aqui</span>
+                        <ion-icon name="education-outline" aria-hidden="true"></ion-icon>
+                    </a>
+                </div>
+            </section>
+
+            <!-- #CTA -->
+            <section class="section cta"
+                     id="tuition"
+                     aria-label="workshop"
+                     style="background-image: url('/img/cta-bg.png')">
+                <div class="container">
+                    <figure class="cta-banner">
+                        <img src="/img/9.jpg"
+                             width="580"
+                             height="380"
+                             loading="lazy"
+                             alt="cta banner"
+                             class="img-cover" />
+                    </figure>
+
+                    <div class="cta-content">
+                        <p class="section-subtitle">Centro de Matricula</p>
+
+                        <h2 class="h2 section-title">Únase a El Instituto Nacional De Usulután</h2>
+
+                        <p class="section-text">
+                            Formá parte del Instituto Nacional de Usulután y asegura tu lugar en una educación de calidad. Nuestro equipo docente está comprometido con tu aprendizaje y te acompaña en cada etapa de tu formación, ofreciéndote orientación académica, valores y las herramientas necesarias para construir tu futuro.
+                        </p>
+
+                        <!-- Nose porque carajos me da error un simple enlace -->
+
+                        <a href="/Home/Matricular" class="btn btn-secondary">
+                            <span class="span">Matricúlate Aquí</span>
+                            <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
+                        </a>
+
+
+
+                        
+                    </div>
+                </div>
+            </section>
+
+            <!-- Estamos jodidos aqui no entiendo como algo tan simple me esta haciendo la vida imposible -->
+
+
+
+            <!-- #NEWSLETTER -->
+            <section class="section newsletter"
+                     id="admission"
+                     aria-label="newsletter"
+                     style="background-image: url('/img/newsletter-bg.jpg')">
+                <div class="container">
+                    <p class="section-subtitle">
+                        Instituto Nacional De Usulután
+                    </p>
+
+                    <h2 class="h2 section-title">
+                        Si tienes dudas no dudes en contactarnos
+                    </h2>
+
+                    <form action="https://formspree.io/f/xjvqrygn"
+                          method="POST"
+                          class="newsletter-form">
+                        <div class="input-wrapper">
+                            <input type="tel"
+                                   name="phone_number"
+                                   aria-label="tel"
+                                   placeholder="Escribenos"
+                                   required
+                                   class="email-field" />
+
+                            <ion-icon name="mail-open-outline"
+                                      aria-hidden="true"></ion-icon>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <span class="span">Contacto</span>
+                            <ion-icon name="arrow-forward-outline"
+                                      aria-hidden="true"></ion-icon>
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <!-- #FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo">Intituto Nacional de Usulután</a>
+
+                    <p class="section-text">
+                        Únete al Instituto Nacional de Usulután y comienza tu camino hacia un futuro lleno de oportunidades. Contamos con docentes comprometidos, formación de calidad y un ambiente que impulsa tu crecimiento académico y personal.
+                    </p>
+
+                    <ul class="social-list">
+                        <li>
+                            <a href="https://web.facebook.com/profile.php?id=100083138351633&_rdc=1&_rdr"
+                               class="social-link"
+                               target="_blank">
+                                <ion-icon name="logo-facebook"></ion-icon>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <ul class="footer-list">
+                    <li>
+                        <p class="footer-list-title">Explorar</p>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">
+                            <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
+                            <span class="span">Sobre nosotros</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">
+                            <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
+                            <span class="span">Blog & Noticias</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">
+                            <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
+                            <span class="span">Testimonios</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="footer-list">
+                    <li>
+                        <p class="footer-list-title">Contacto</p>
+                    </li>
+
+                    <li class="footer-item">
+                        <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+                        <address class="footer-link">
+                            8a Avenida Nte., Usulután, El Salvador
+                        </address>
+                    </li>
+
+                    <li class="footer-item">
+                        <ion-icon name="call" aria-hidden="true"></ion-icon>
+                        <a href="tel:+923023207807" class="footer-link"> 2662 0406</a>
+                    </li>
+
+                    <li class="footer-item">
+                        <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+                        <a href="mailto:alexandermartinez19a@gmail.com" class="footer-link">
+                            alexandermartinez19a@gmail.com
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">
+                    Copyright 2025 Software Studios |
+                    <a href="https://software-studios-sv.netlify.app/"
+                       target="_blank"
+                       class="copyright-link">
+                        Alexander Martinez USSS001725
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- #BACK TO TOP -->
+    <a href="#top"
+       class="back-top-btn"
+       aria-label="Back to top"
+       data-back-top-btn>
+        <ion-icon name="arrow-up"></ion-icon>
+    </a>
+
+    <!-- custom js -->
+    <script src="~/js/script.js" defer></script>
+
+    <!-- ionicons -->
+    <script type="module"
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
+    

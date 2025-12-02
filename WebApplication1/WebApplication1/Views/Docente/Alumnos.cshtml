@@ -1,0 +1,73 @@
+﻿@model IEnumerable<WebApplication1.Models.Alumno>
+
+@{
+    ViewData["Title"] = "Panel docente - Alumnos";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">Panel docente - Alumnos</h2>
+
+        <div>
+            <a asp-controller="Docente" asp-action="Materias" class="btn btn-outline-secondary btn-sm me-2">
+                Ver materias
+            </a>
+            <a asp-controller="Docente" asp-action="CrearAlumno" class="btn btn-primary btn-sm">
+                + Nuevo alumno
+            </a>
+        </div>
+    </div>
+
+    <p class="text-muted">
+        Seleccione un alumno para ver y editar sus notas.
+    </p>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Mensaje"]
+        </div>
+    }
+
+    <div class="card">
+        <div class="card-body p-0">
+            <table class="table table-striped mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Carne</th>
+                        <th>Nombre</th>
+                        <th>Especialidad</th>
+                        <th>Grado / Sección</th>
+                        <th style="width: 230px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var a in Model)
+                    {
+                        <tr>
+                            <td>@a.Carne</td>
+                            <td>@a.NombreCompleto</td>
+                            <td>@a.Especialidad</td>
+                            <td>@a.GradoSeccion</td>
+                            <td class="text-end">
+                                <a asp-controller="Docente"
+                                   asp-action="EditarNotas"
+                                   asp-route-id="@a.Id"
+                                   class="btn btn-sm btn-primary me-2">
+                                    Editar notas
+                                </a>
+
+                                <a asp-controller="Notas"
+                                   asp-action="Index"
+                                   asp-route-idAlumno="@a.Id"
+                                   class="btn btn-sm btn-outline-secondary">
+                                    Ver notas (alumno)
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

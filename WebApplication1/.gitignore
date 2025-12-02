@@ -1,0 +1,4 @@
+# Carpetas que NO queremos en Git
+.vs/
+bin/
+obj/
