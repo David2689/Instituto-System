@@ -1747,5 +1747,12 @@ body {
             background-color: #0056b3;
         }
 
+    /* Separación del contenido para que no quede pegado al header fijo */
+    .page-with-header {
+        margin-top: 120px; /* si ves que es mucho o poco, ajústalo (90, 100, etc.) */
+    }
+    .page-with-header {
+        margin-top: 140px; /* ajusta si quieres más/menos espacio */
+    }
 
 }

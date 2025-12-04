@@ -1,4 +1,4 @@
-﻿@* Views/Home/Index.cshtml *@
+﻿@* Views/Shared/_Layout.cshtml *@
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,12 +36,12 @@
     <header class="header" data-header>
         <div class="container">
             <h1>
-                <a href="#" class="logo">Instituto Nacional De Usulután</a>
+                <a href="/#home" class="logo">Instituto Nacional De Usulután</a>
             </h1>
 
             <nav class="navbar" data-navbar>
                 <div class="navbar-top">
-                    <a href="#" class="logo">Nouman School</a>
+                    <a href="/#home" class="logo">Nouman School</a>
 
                     <button class="nav-close-btn"
                             aria-label="Close menu"
@@ -52,8 +52,11 @@
 
                 <ul class="navbar-list">
 
+                    <!-- SOLO UN "Inicio" -->
                     <li class="navbar-item">
-                        <a href="#home" class="navbar-link" data-nav-toggler>Inicio</a>
+                        <a href="/#home" class="navbar-link" data-nav-toggler>
+                            Inicio
+                        </a>
                     </li>
 
                     <li class="navbar-item">
@@ -63,21 +66,31 @@
                     </li>
 
                     <li class="navbar-item">
-                        <a href="#classes" class="navbar-link" data-nav-toggler>Especialidades</a>
+                        <a href="/#classes" class="navbar-link" data-nav-toggler>Especialidades</a>
                     </li>
 
                     <li class="navbar-item">
-                        <a href="#tuition" class="navbar-link" data-nav-toggler>Centro de Matricula</a>
+                        <a href="/#tuition" class="navbar-link" data-nav-toggler>Centro de Matricula</a>
                     </li>
 
                     <li class="navbar-item">
-                        <a asp-controller="Account" asp-action="Login" class="navbar-link">Iniciar sesión</a>
+                        <a asp-controller="Account" asp-action="Login" class="navbar-link">
+                            Iniciar sesión
+                        </a>
                     </li>
 
-                    <li><a asp-controller="Admin" asp-action="Index">Panel administrativo</a></li>
+                    <li class="navbar-item">
+                        <a asp-controller="Docente" asp-action="Alumnos" class="navbar-link">
+                            Panel docente
+                        </a>
+                    </li>
 
+                    <li class="navbar-item">
+                        <a asp-controller="Admin" asp-action="Index" class="navbar-link">
+                            Panel administrativo
+                        </a>
+                    </li>
                 </ul>
-
 
                 <div class="header-actions">
                     <button class="header-action-btn"
@@ -129,353 +142,7 @@
     </div>
 
     <main>
-        <article>
-            <!-- #HERO -->
-            <section class="hero"
-                     id="home"
-                     aria-label="hero"
-                     style="background-image: url('/img/hero-bg.jpg')">
-                <div class="container">
-                    <div class="hero-content">
-                        <p class="section-subtitle">Impulsando mentes</p>
-
-                        <h2 class="h1 hero-title">Construyendo el Mañana.</h2>
-
-                        <p class="hero-text">
-                            En el Instituto Nacional De Usulután, nos dedicamos a moldear el
-                            futuro de nuestros estudiantes, brindándoles una educación de
-                            calidad y fomentando un ambiente de aprendizaje inspirador.
-                        </p>
-
-                        <a href="https://www.facebook.com/profile.php?id=61572024186894"
-                           class="btn btn-primary"
-                           target="_blank">
-                            <span class="span">Mira las Actividades Institucionales</span>
-                            <ion-icon name="arrow-forward-outline"
-                                      aria-hidden="true"></ion-icon>
-                        </a>
-                    </div>
-
-                    <figure class="hero-banner">
-                        <img src="/img/hero-banner.png"
-                             width="500"
-                             height="500"
-                             loading="lazy"
-                             alt="hero image"
-                             class="w-100" />
-
-                        <img src="/img/hero-abs-1.png"
-                             width="318"
-                             height="352"
-                             loading="lazy"
-                             aria-hidden="true"
-                             class="abs-img abs-img-1" />
-
-                        <img src="/img/hero-abs-2.png"
-                             width="160"
-                             height="160"
-                             loading="lazy"
-                             aria-hidden="true"
-                             class="abs-img abs-img-2" />
-                    </figure>
-                </div>
-            </section>
-
-            <!-- #COURSES / ESPECIALIDADES -->
-            <section class="section course"
-                     id="classes"
-                     aria-label="course"
-                     style="background-image: url('/img/course-bg.jpg')">
-                <div class="container">
-                    <p class="section-subtitle">Explora nuestras áreas de especialización</p>
-
-                    <h2 class="h2 section-title">Las mejores especialidades para tus estudios</h2>
-
-                    <ul class="grid-list">
-                        <li>
-                            <div class="course-card">
-                                <figure class="card-banner">
-                                    <img src="/img/atencion primaria en salud.png"
-                                         width="370"
-                                         height="270"
-                                         loading="lazy"
-                                         alt="School Students"
-                                         class="img-cover" />
-                                </figure>
-
-                                <div class="card-actions">
-                                    <span class="badge">Basic</span>
-
-                                    <button class="whishlist-btn"
-                                            aria-label="Add to whishlist"
-                                            data-whish-btn>
-                                        <ion-icon name="heart"></ion-icon>
-                                    </button>
-                                </div>
-
-                                <div class="card-content">
-                                    <ul class="card-meta-list">
-                                        <li class="card-meta-item">
-                                            <ion-icon name="reader-outline"
-                                                      aria-hidden="true"></ion-icon>
-                                            <span class="card-meta-text">24 Modulos</span>
-                                        </li>
-
-                                        <li class="card-meta-item">
-                                            <ion-icon name="time-outline"
-                                                      aria-hidden="true"></ion-icon>
-                                            <time datetime="PT18H15M44S" class="card-meta-text">3 Años</time>
-                                        </li>
-                                    </ul>
-
-                                    <h3 class="h3">
-                                        <a href="#" class="card-title">Salud y Bienestar Social</a>
-                                    </h3>
-
-                                    <div class="rating-wrapper">
-                                        <div class="rating">
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                        </div>
-                                        <span class="rating-text">(Reseñas de padres)</span>
-                                    </div>
-
-                                    <div class="card-footer">
-                                        <div class="card-price">
-                                            <span class="span">Ministerio de educación</span>
-                                        </div>
-
-                                        <div class="card-meta-item">
-                                            <ion-icon name="people-outline"
-                                                      aria-hidden="true"></ion-icon>
-                                            <span class="card-meta-text"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="course-card">
-                                <figure class="card-banner">
-                                    <img src="/img/dsw.png"
-                                         width="370"
-                                         height="270"
-                                         loading="lazy"
-                                         alt="School Students"
-                                         class="img-cover" />
-                                </figure>
-
-                                <div class="card-actions">
-                                    <span class="badge">Basic</span>
-
-                                    <button class="whishlist-btn"
-                                            aria-label="Add to whishlist"
-                                            data-whish-btn>
-                                        <ion-icon name="heart"></ion-icon>
-                                    </button>
-                                </div>
-
-                                <div class="card-content">
-                                    <ul class="card-meta-list">
-                                        <li class="card-meta-item">
-                                            <ion-icon name="reader-outline"
-                                                      aria-hidden="true"></ion-icon>
-                                            <span class="card-meta-text">24 Modulos</span>
-                                        </li>
-
-                                        <li class="card-meta-item">
-                                            <ion-icon name="time-outline"
-                                                      aria-hidden="true"></ion-icon>
-                                            <time datetime="PT18H15M44S" class="card-meta-text">3 años</time>
-                                        </li>
-                                    </ul>
-
-                                    <h3 class="h3">
-                                        <a href="#" class="card-title">Desarrollo de Software</a>
-                                    </h3>
-
-                                    <div class="rating-wrapper">
-                                        <div class="rating">
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                        </div>
-                                        <span class="rating-text">(Reseñas de padres)</span>
-                                    </div>
-
-                                    <div class="card-footer">
-                                        <div class="card-price">
-                                            <span class="span">Ministerio de educación</span>
-                                        </div>
-
-                                        <div class="card-meta-item">
-                                            <ion-icon name="people-outline"
-                                                      aria-hidden="true"></ion-icon>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="course-card">
-                                <figure class="card-banner">
-                                    <img src="/img/logistica.png"
-                                         width="370"
-                                         height="270"
-                                         loading="lazy"
-                                         alt="School Students"
-                                         class="img-cover" />
-                                </figure>
-
-                                <div class="card-actions">
-                                    <span class="badge">Basic</span>
-
-                                    <button class="whishlist-btn"
-                                            aria-label="Add to whishlist"
-                                            data-whish-btn>
-                                        <ion-icon name="heart"></ion-icon>
-                                    </button>
-                                </div>
-
-                                <div class="card-content">
-                                    <ul class="card-meta-list">
-                                        <li class="card-meta-item">
-                                            <ion-icon name="reader-outline"
-                                                      aria-hidden="true"></ion-icon>
-                                            <span class="card-meta-text">24 Modulos </span>
-                                        </li>
-
-                                        <li class="card-meta-item">
-                                            <ion-icon name="time-outline"
-                                                      aria-hidden="true"></ion-icon>
-                                            <time datetime="PT18H15M44S" class="card-meta-text">3 años</time>
-                                        </li>
-                                    </ul>
-
-                                    <h3 class="h3">
-                                        <a href="#" class="card-title">Logística Comercial y Global</a>
-                                    </h3>
-
-                                    <div class="rating-wrapper">
-                                        <div class="rating">
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                        </div>
-                                        <span class="rating-text">(Reseñas de padres)</span>
-                                    </div>
-
-                                    <div class="card-footer">
-                                        <div class="card-price">
-                                            <span class="span">Ministerio de educación</span>
-                                        </div>
-
-                                        <div class="card-meta-item">
-                                            <ion-icon name="people-outline"
-                                                      aria-hidden="true"></ion-icon>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <a href="#" class="btn btn-primary">
-                        <span class="span">Tu futuro esta aqui</span>
-                        <ion-icon name="education-outline" aria-hidden="true"></ion-icon>
-                    </a>
-                </div>
-            </section>
-
-            <!-- #CTA -->
-            <section class="section cta"
-                     id="tuition"
-                     aria-label="workshop"
-                     style="background-image: url('/img/cta-bg.png')">
-                <div class="container">
-                    <figure class="cta-banner">
-                        <img src="/img/9.jpg"
-                             width="580"
-                             height="380"
-                             loading="lazy"
-                             alt="cta banner"
-                             class="img-cover" />
-                    </figure>
-
-                    <div class="cta-content">
-                        <p class="section-subtitle">Centro de Matricula</p>
-
-                        <h2 class="h2 section-title">Únase a El Instituto Nacional De Usulután</h2>
-
-                        <p class="section-text">
-                            Formá parte del Instituto Nacional de Usulután y asegura tu lugar en una educación de calidad. Nuestro equipo docente está comprometido con tu aprendizaje y te acompaña en cada etapa de tu formación, ofreciéndote orientación académica, valores y las herramientas necesarias para construir tu futuro.
-                        </p>
-
-                        <!-- Nose porque carajos me da error un simple enlace -->
-
-                        <a href="/Home/Matricular" class="btn btn-secondary">
-                            <span class="span">Matricúlate Aquí</span>
-                            <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-                        </a>
-
-
-
-                        
-                    </div>
-                </div>
-            </section>
-
-            <!-- Estamos jodidos aqui no entiendo como algo tan simple me esta haciendo la vida imposible -->
-
-
-
-            <!-- #NEWSLETTER -->
-            <section class="section newsletter"
-                     id="admission"
-                     aria-label="newsletter"
-                     style="background-image: url('/img/newsletter-bg.jpg')">
-                <div class="container">
-                    <p class="section-subtitle">
-                        Instituto Nacional De Usulután
-                    </p>
-
-                    <h2 class="h2 section-title">
-                        Si tienes dudas no dudes en contactarnos
-                    </h2>
-
-                    <form action="https://formspree.io/f/xjvqrygn"
-                          method="POST"
-                          class="newsletter-form">
-                        <div class="input-wrapper">
-                            <input type="tel"
-                                   name="phone_number"
-                                   aria-label="tel"
-                                   placeholder="Escribenos"
-                                   required
-                                   class="email-field" />
-
-                            <ion-icon name="mail-open-outline"
-                                      aria-hidden="true"></ion-icon>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">
-                            <span class="span">Contacto</span>
-                            <ion-icon name="arrow-forward-outline"
-                                      aria-hidden="true"></ion-icon>
-                        </button>
-                    </form>
-                </div>
-            </section>
-        </article>
+        @RenderBody()
     </main>
 
     <!-- #FOOTER -->
@@ -483,10 +150,11 @@
         <div class="container">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <a href="#" class="logo">Intituto Nacional de Usulután</a>
+                    <a href="/#home" class="logo">Intituto Nacional de Usulután</a>
 
                     <p class="section-text">
-                        Únete al Instituto Nacional de Usulután y comienza tu camino hacia un futuro lleno de oportunidades. Contamos con docentes comprometidos, formación de calidad y un ambiente que impulsa tu crecimiento académico y personal.
+                        Únete al Instituto Nacional de Usulután y comienza tu camino hacia un futuro lleno de oportunidades.
+                        Contamos con docentes comprometidos, formación de calidad y un ambiente que impulsa tu crecimiento académico y personal.
                     </p>
 
                     <ul class="social-list">
@@ -584,4 +252,3 @@
             src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
-    

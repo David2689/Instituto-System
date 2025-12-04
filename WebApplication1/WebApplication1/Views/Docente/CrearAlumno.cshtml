@@ -11,31 +11,39 @@
         ← Volver al listado de alumnos
     </a>
 
-    <form asp-action="CrearAlumno" method="post">
-        @Html.AntiForgeryToken()
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form asp-action="CrearAlumno" method="post">
+                @Html.AntiForgeryToken()
 
-        <div class="mb-3">
-            <label asp-for="Carne" class="form-label"></label>
-            <input asp-for="Carne" class="form-control" />
+                <div class="mb-3">
+                    <label asp-for="Carne" class="form-label"></label>
+                    <input asp-for="Carne" class="form-control" />
+                    <span asp-validation-for="Carne" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="NombreCompleto" class="form-label"></label>
+                    <input asp-for="NombreCompleto" class="form-control" />
+                    <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Especialidad" class="form-label"></label>
+                    <input asp-for="Especialidad" class="form-control" />
+                    <span asp-validation-for="Especialidad" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="GradoSeccion" class="form-label"></label>
+                    <input asp-for="GradoSeccion" class="form-control" />
+                    <span asp-validation-for="GradoSeccion" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    Guardar alumno
+                </button>
+            </form>
         </div>
-
-        <div class="mb-3">
-            <label asp-for="NombreCompleto" class="form-label"></label>
-            <input asp-for="NombreCompleto" class="form-control" />
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="Especialidad" class="form-label"></label>
-            <input asp-for="Especialidad" class="form-control" />
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="GradoSeccion" class="form-label"></label>
-            <input asp-for="GradoSeccion" class="form-control" />
-        </div>
-
-        <button type="submit" class="btn btn-success">
-            Guardar alumno
-        </button>
-    </form>
+    </div>
 </div>

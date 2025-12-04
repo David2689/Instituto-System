@@ -2,45 +2,14 @@
 @using WebApplication1.Models
 
 @{
-    var alumnos = ViewBag.Alumnos as List<Alumno>;
+    ViewData["Title"] = "Apartado de notas";
+
+    var alumnos = ViewBag.Alumnos as List<Alumno> ?? new List<Alumno>();
     int alumnoSeleccionadoId = ViewBag.AlumnoSeleccionadoId ?? 0;
 }
 
-<h2>Registro de notas del alumno</h2>
+<div class="container mt-5 mb-5 page-with-header">
 
-<form asp-controller="Notas" asp-action="Index" method="get">
-    <label for="idAlumno"><strong>Seleccione el alumno:</strong></label>
-    <select id="idAlumno" name="idAlumno">
-        @if (alumnos != null)
-        {
-            foreach (var a in alumnos)
-            {
-                if (a.Id == alumnoSeleccionadoId)
-                {
-                    <option value="@a.Id" selected="selected">
-                        @a.Carne - @a.NombreCompleto
-                    </option>
-                }
-                else
-                {
-                    <option value="@a.Id">
-                        @a.Carne - @a.NombreCompleto
-                    </option>
-                }
-            }
-        }
-    </select>
-
-    <button type="submit">Ver notas</button>
-</form>
-
-<hr />
-
-@{
-    ViewData["Title"] = "Apartado de notas";
-}
-
-<div class="container mt-5 mb-5">
     <div class="row mb-4">
         <div class="col-md-8">
             <h2 class="mb-2">Registro de notas del alumno</h2>
@@ -48,12 +17,48 @@
                 Aquí se muestran las calificaciones registradas de forma transparente.
             </p>
         </div>
+
         <div class="col-md-4 text-md-end text-center">
-            @* Si quieres puedes usar una imagen del proyecto como icono de notas *@
-            <!-- <img src="~/img/4.png" alt="Notas" style="max-height:120px;" /> -->
+            @* Aquí podrías poner un ícono o imagen si quieres *@
+            @* <img src="~/img/4.png" alt="Notas" style="max-height:120px;" /> *@
         </div>
     </div>
 
+    <!-- Selector de alumno -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <form asp-controller="Notas" asp-action="Index" method="get" class="row g-3 align-items-end">
+                <div class="col-md-8">
+                    <label for="idAlumno" class="form-label"><strong>Seleccione el alumno:</strong></label>
+                    <select id="idAlumno" name="idAlumno" class="form-select">
+                        @foreach (var a in alumnos)
+                        {
+                            if (a.Id == alumnoSeleccionadoId)
+                            {
+                                <option value="@a.Id" selected>
+                                    @a.Carne - @a.NombreCompleto
+                                </option>
+                            }
+                            else
+                            {
+                                <option value="@a.Id">
+                                    @a.Carne - @a.NombreCompleto
+                                </option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-4 text-md-start text-center">
+                    <button type="submit" class="btn btn-primary mt-4">
+                        Ver notas
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Datos del alumno -->
     <div class="card mb-4 shadow-sm">
         <div class="card-body">
             <h4 class="card-title mb-3">@Model.NombreCompleto</h4>
@@ -70,6 +75,7 @@
         </div>
     </div>
 
+    <!-- Tabla de notas -->
     <div class="card shadow-sm">
         <div class="card-header">
             <strong>Detalle de notas por materia</strong>
@@ -111,4 +117,5 @@
             </div>
         </div>
     </div>
+
 </div>

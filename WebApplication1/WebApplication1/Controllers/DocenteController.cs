@@ -164,6 +164,44 @@ namespace WebApplication1.Controllers
             TempData["Mensaje"] = "Alumno creado correctamente.";
             return RedirectToAction(nameof(Alumnos));
         }
+        // ==============================
+        // ALUMNOS - EDITAR DATOS
+        // ==============================
+
+        // GET: /Docente/EditarAlumno/5
+        public IActionResult EditarAlumno(int id)
+        {
+            if (!EsDocente())
+                return RedirectToAction("Login", "Account");
+
+            var alumno = _context.Alumnos.Find(id);
+            if (alumno == null)
+                return NotFound();
+
+            return View(alumno);
+        }
+
+        // POST: /Docente/EditarAlumno/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditarAlumno(int id, Alumno alumno)
+        {
+            if (!EsDocente())
+                return RedirectToAction("Login", "Account");
+
+            if (id != alumno.Id)
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return View(alumno);
+
+            _context.Update(alumno);
+            _context.SaveChanges();
+
+            TempData["Mensaje"] = "Alumno actualizado correctamente.";
+            return RedirectToAction(nameof(Alumnos));
+        }
+
 
         // ==============================
         // MATERIAS - LISTAR
@@ -232,5 +270,51 @@ namespace WebApplication1.Controllers
             TempData["Mensaje"] = "Materia creada correctamente.";
             return RedirectToAction(nameof(Materias));
         }
+        // ==============================
+        // ALUMNOS - ELIMINAR
+        // ==============================
+
+        // GET: /Docente/EliminarAlumno/5
+        public IActionResult EliminarAlumno(int id)
+        {
+            if (!EsDocente())
+                return RedirectToAction("Login", "Account");
+
+            var alumno = _context.Alumnos
+                .AsNoTracking()
+                .FirstOrDefault(a => a.Id == id);
+
+            if (alumno == null)
+                return NotFound();
+
+            return View(alumno);
+        }
+
+        // POST: /Docente/EliminarAlumno/5
+        [HttpPost, ActionName("EliminarAlumno")]
+        [ValidateAntiForgeryToken]
+        public IActionResult EliminarAlumnoConfirmado(int id)
+        {
+            if (!EsDocente())
+                return RedirectToAction("Login", "Account");
+
+            var alumno = _context.Alumnos
+                .Include(a => a.Notas)
+                .FirstOrDefault(a => a.Id == id);
+
+            if (alumno == null)
+                return NotFound();
+
+            // Borrar primero las notas relacionadas
+            _context.Notas.RemoveRange(alumno.Notas);
+
+            // Luego borrar el alumno
+            _context.Alumnos.Remove(alumno);
+            _context.SaveChanges();
+
+            TempData["Mensaje"] = "Alumno eliminado correctamente.";
+            return RedirectToAction(nameof(Alumnos));
+        }
+
     }
 }

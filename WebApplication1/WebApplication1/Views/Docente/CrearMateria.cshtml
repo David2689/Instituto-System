@@ -11,21 +11,27 @@
         ← Volver a materias
     </a>
 
-    <form asp-action="CrearMateria" method="post">
-        @Html.AntiForgeryToken()
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form asp-action="CrearMateria" method="post">
+                @Html.AntiForgeryToken()
 
-        <div class="mb-3">
-            <label asp-for="Nombre" class="form-label"></label>
-            <input asp-for="Nombre" class="form-control" />
+                <div class="mb-3">
+                    <label asp-for="Nombre" class="form-label"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="UnidadesValorativas" class="form-label"></label>
+                    <input asp-for="UnidadesValorativas" class="form-control" type="number" min="1" />
+                    <span asp-validation-for="UnidadesValorativas" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    Guardar materia
+                </button>
+            </form>
         </div>
-
-        <div class="mb-3">
-            <label asp-for="UnidadesValorativas" class="form-label"></label>
-            <input asp-for="UnidadesValorativas" class="form-control" type="number" />
-        </div>
-
-        <button type="submit" class="btn btn-success">
-            Guardar materia
-        </button>
-    </form>
+    </div>
 </div>

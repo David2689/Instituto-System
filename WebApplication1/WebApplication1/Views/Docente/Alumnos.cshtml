@@ -4,7 +4,7 @@
     ViewData["Title"] = "Panel docente - Alumnos";
 }
 
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5 page-with-header">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="mb-0">Panel docente - Alumnos</h2>
 
@@ -49,18 +49,18 @@
                             <td>@a.NombreCompleto</td>
                             <td>@a.Especialidad</td>
                             <td>@a.GradoSeccion</td>
-                            <td class="text-end">
+                            <td>
                                 <a asp-controller="Docente"
                                    asp-action="EditarNotas"
                                    asp-route-id="@a.Id"
-                                   class="btn btn-sm btn-primary me-2">
+                                   class="btn btn-primary btn-sm">
                                     Editar notas
                                 </a>
 
                                 <a asp-controller="Notas"
                                    asp-action="Index"
                                    asp-route-idAlumno="@a.Id"
-                                   class="btn btn-sm btn-outline-secondary">
+                                   class="btn btn-outline-primary btn-sm">
                                     Ver notas (alumno)
                                 </a>
                             </td>

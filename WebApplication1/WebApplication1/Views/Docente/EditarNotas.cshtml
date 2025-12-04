@@ -4,7 +4,7 @@
     ViewData["Title"] = "Editar notas del alumno";
 }
 
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5 page-with-header">
     <h2 class="mb-3">Editar notas del alumno</h2>
 
     <a asp-controller="Docente" asp-action="Alumnos" class="btn btn-link mb-3">
@@ -18,27 +18,21 @@
         </div>
     }
 
-    <div class="card mb-4">
+    <!-- Datos del alumno -->
+    <div class="card mb-4 shadow-sm">
         <div class="card-body">
             <h4 class="card-title mb-3">@Model.NombreCompleto</h4>
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-1"><strong>Carne:</strong> @Model.Carne</p>
-                    <p class="mb-1"><strong>Grado y sección:</strong> @Model.GradoSeccion</p>
-                </div>
-                <div class="col-md-6">
-                    <p class="mb-1"><strong>Especialidad:</strong> @Model.Especialidad</p>
-                </div>
-            </div>
+            <p class="mb-1"><strong>Carne:</strong> @Model.Carne</p>
+            <p class="mb-1"><strong>Grado y sección:</strong> @Model.GradoSeccion</p>
+            <p class="mb-1"><strong>Especialidad:</strong> @Model.Especialidad</p>
         </div>
     </div>
 
+    <!-- Formulario de edición de notas -->
     <form asp-action="EditarNotas" method="post">
         @Html.AntiForgeryToken()
 
-        <input type="hidden" asp-for="AlumnoId" />
-
-        <div class="card">
+        <div class="card shadow-sm">
             <div class="card-header">
                 <strong>Notas por materia</strong>
             </div>
@@ -50,7 +44,7 @@
                                 <th>Materia</th>
                                 <th class="text-center">Parcial 1</th>
                                 <th class="text-center">Parcial 2</th>
-                                <th class="text-center">Nota Final</th>
+                                <th class="text-center">Nota final</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,17 +52,22 @@
                             {
                                 <tr>
                                     <td>
+                                        @* Id oculto SOLO si existe en tu modelo
+                                           <input type="hidden" asp-for="Notas[i].Id" />
+                                        *@
                                         @Model.Notas[i].Materia
-                                        <input type="hidden" asp-for="Notas[i].NotaId" />
                                     </td>
-                                    <td class="text-center" style="max-width:120px;">
-                                        <input asp-for="Notas[i].Parcial1" class="form-control form-control-sm text-center" />
+                                    <td class="text-center" style="max-width: 90px;">
+                                        <input asp-for="Notas[i].Parcial1"
+                                               class="form-control form-control-sm text-center" />
                                     </td>
-                                    <td class="text-center" style="max-width:120px;">
-                                        <input asp-for="Notas[i].Parcial2" class="form-control form-control-sm text-center" />
+                                    <td class="text-center" style="max-width: 90px;">
+                                        <input asp-for="Notas[i].Parcial2"
+                                               class="form-control form-control-sm text-center" />
                                     </td>
-                                    <td class="text-center" style="max-width:120px;">
-                                        <input asp-for="Notas[i].NotaFinal" class="form-control form-control-sm text-center" />
+                                    <td class="text-center" style="max-width: 90px;">
+                                        <input asp-for="Notas[i].NotaFinal"
+                                               class="form-control form-control-sm text-center" />
                                     </td>
                                 </tr>
                             }
@@ -76,11 +75,12 @@
                     </table>
                 </div>
             </div>
-            <div class="card-footer text-end">
-                <button type="submit" class="btn btn-success">
-                    Guardar cambios
-                </button>
-            </div>
+        </div>
+
+        <div class="mt-3 text-end">
+            <button type="submit" class="btn btn-primary">
+                Guardar cambios
+            </button>
         </div>
     </form>
 </div>

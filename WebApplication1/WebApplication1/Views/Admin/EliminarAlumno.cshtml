@@ -1,0 +1,22 @@
+﻿@model WebApplication1.Models.Alumno
+
+<h2>Eliminar alumno</h2>
+
+<p>¿Estás seguro de que deseas eliminar este alumno?</p>
+
+<ul>
+    <li><strong>Carne:</strong> @Model.Carne</li>
+    <li><strong>Nombre:</strong> @Model.NombreCompleto</li>
+    <li><strong>Especialidad:</strong> @Model.Especialidad</li>
+    <li><strong>Grado / Sección:</strong> @Model.GradoSeccion</li>
+</ul>
+
+<p>
+    <strong>Nota:</strong> también se eliminarán todas las notas asociadas a este alumno.
+</p>
+
+<form asp-action="EliminarAlumno" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit">Sí, eliminar</button>
+    <a asp-action="Alumnos">Cancelar</a>
+</form>

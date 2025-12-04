@@ -1,0 +1,34 @@
+﻿@model WebApplication1.Models.Alumno
+
+@{
+    ViewData["Title"] = "Crear alumno";
+}
+
+<h2>Crear nuevo alumno</h2>
+
+<a asp-action="Alumnos">← Volver al listado</a>
+
+<form asp-action="CrearAlumno" method="post">
+    <div>
+        <label>Carne</label><br />
+        <input asp-for="Carne" />
+    </div>
+
+    <div>
+        <label>Nombre completo</label><br />
+        <input asp-for="NombreCompleto" />
+    </div>
+
+    <div>
+        <label>Especialidad</label><br />
+        <input asp-for="Especialidad" />
+    </div>
+
+    <div>
+        <label>Grado / Sección</label><br />
+        <input asp-for="GradoSeccion" />
+    </div>
+
+    <br />
+    <button type="submit">Guardar alumno</button>
+</form>
