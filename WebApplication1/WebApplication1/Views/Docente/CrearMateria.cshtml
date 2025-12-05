@@ -1,37 +1,50 @@
 ﻿@model WebApplication1.Models.Materia
 
 @{
-    ViewData["Title"] = "Crear materia";
+    ViewData["Title"] = "Crear nueva materia";
 }
 
-<div class="container mt-5 mb-5">
-    <h2 class="mb-3">Crear nueva materia</h2>
+<div class="page-with-header">
+    <div class="admin-box">
+        <div class="admin-header">
+            <h2 class="admin-title">Crear nueva materia</h2>
+            <p class="admin-subtitle">
+                Completa los datos para registrar una nueva materia en el sistema.
+            </p>
+        </div>
 
-    <a asp-controller="Docente" asp-action="Materias" class="btn btn-link mb-3">
-        ← Volver a materias
-    </a>
+        <div class="admin-body">
+            <a asp-action="Materias" class="btn-ghost">
+                ← Volver a materias
+            </a>
 
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <form asp-action="CrearMateria" method="post">
-                @Html.AntiForgeryToken()
+            <form asp-action="CrearMateria" method="post" class="mt-4">
 
-                <div class="mb-3">
+                <div class="form-group">
                     <label asp-for="Nombre" class="form-label"></label>
                     <input asp-for="Nombre" class="form-control" />
                     <span asp-validation-for="Nombre" class="text-danger"></span>
                 </div>
 
-                <div class="mb-3">
+                <div class="form-group">
                     <label asp-for="UnidadesValorativas" class="form-label"></label>
-                    <input asp-for="UnidadesValorativas" class="form-control" type="number" min="1" />
+                    <input asp-for="UnidadesValorativas" class="form-control" />
                     <span asp-validation-for="UnidadesValorativas" class="text-danger"></span>
                 </div>
 
-                <button type="submit" class="btn btn-success">
-                    Guardar materia
-                </button>
+                <div class="mt-4">
+                    <button type="submit" class="btn-primary-hero">
+                        Guardar materia
+                    </button>
+                </div>
+
             </form>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

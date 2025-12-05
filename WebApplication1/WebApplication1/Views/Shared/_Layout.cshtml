@@ -59,10 +59,8 @@
                         </a>
                     </li>
 
-                    <li class="navbar-item">
-                        <a asp-controller="Notas" asp-action="Index" class="navbar-link" data-nav-toggler>
-                            Apartado de notas
-                        </a>
+                    <li>
+                        <a asp-controller="Account" asp-action="Login">Apartado de notas</a>
                     </li>
 
                     <li class="navbar-item">
@@ -86,8 +84,13 @@
                     </li>
 
                     <li class="navbar-item">
-                        <a asp-controller="Admin" asp-action="Index" class="navbar-link">
+                        <a asp-controller="Admin" asp-action="Index">
                             Panel administrativo
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Matricula" asp-action="Lista">
+                            Listado de Matrículas
                         </a>
                     </li>
                 </ul>
@@ -230,6 +233,9 @@
                         Alexander Martinez USSS001725
                     </a>
                 </p>
+                <a asp-controller="Matricula" asp-action="Crear" class="navbar-link">
+                    Centro de Matricula
+                </a>
             </div>
         </div>
     </footer>
@@ -251,4 +257,6 @@
     <script nomodule
             src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
+    @RenderSection("Scripts", required: false)
 </html>
+

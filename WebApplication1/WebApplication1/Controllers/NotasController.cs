@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
-using System.Linq;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 
 namespace WebApplication1.Controllers
 {
@@ -15,73 +15,69 @@ namespace WebApplication1.Controllers
             _context = context;
         }
 
-        private bool EsAlumno()
-        {
-            return HttpContext.Session.GetString("Rol") == "Alumno";
-        }
-
-        private bool EsDocente()
-        {
-            return HttpContext.Session.GetString("Rol") == "Docente";
-        }
-
-        // GET: /Notas   o   /Notas?idAlumno=2
+        // GET: /Notas  o /Notas?idAlumno=4
         public IActionResult Index(int? idAlumno)
         {
-            // 1) Obtener todos los alumnos para el selector
+            // 1) Leemos rol y alumno en sesión
+            var rol = HttpContext.Session.GetString("Rol");
+            bool esAlumno = rol == "Alumno";
+            int? alumnoIdSesion = HttpContext.Session.GetInt32("AlumnoId");
+
+            // 2) Si es ALUMNO, SIEMPRE forzamos a que vea solo sus notas
+            if (esAlumno)
+            {
+                if (alumnoIdSesion == null)
+                {
+                    // No debería pasar, pero por si acaso:
+                    return RedirectToAction("Login", "Account");
+                }
+
+                idAlumno = alumnoIdSesion;   // Ignoramos lo que venga en la URL
+            }
+
+            // 3) Cargamos todos los alumnos (para el combo del docente)
             var alumnos = _context.Alumnos
-                .AsNoTracking()
                 .OrderBy(a => a.NombreCompleto)
                 .ToList();
 
-            if (!alumnos.Any())
+            ViewBag.Alumnos = alumnos;
+            ViewBag.EsAlumno = esAlumno;
+
+            // 4) Si no vino idAlumno y NO es alumno, escogemos el primero
+            if (idAlumno == null)
             {
-                return Content("No hay alumnos registrados.");
+                if (esAlumno && alumnoIdSesion != null)
+                {
+                    idAlumno = alumnoIdSesion;
+                }
+                else if (alumnos.Any())
+                {
+                    idAlumno = alumnos.First().Id;
+                }
+                else
+                {
+                    // No hay alumnos en la BD
+                    return View(new List<Nota>());
+                }
             }
 
-            // 2) Determinar qué alumno mostrar
-            int alumnoId;
-
-            if (idAlumno.HasValue && idAlumno.Value > 0)
-            {
-                alumnoId = idAlumno.Value;
-            }
-            else
-            {
-                // si no se manda id, usamos el primer alumno
-                alumnoId = alumnos.First().Id;
-            }
-
-            var alumno = _context.Alumnos
-                .Include(a => a.Notas)
-                    .ThenInclude(n => n.Materia)
-                .FirstOrDefault(a => a.Id == alumnoId);
-
+            // 5) Buscamos el alumno seleccionado
+            var alumno = _context.Alumnos.FirstOrDefault(a => a.Id == idAlumno);
             if (alumno == null)
             {
                 return NotFound();
             }
 
-            var modelo = new AlumnoNotasViewModel
-            {
-                Carne = alumno.Carne,
-                NombreCompleto = alumno.NombreCompleto,
-                Especialidad = alumno.Especialidad,
-                GradoSeccion = alumno.GradoSeccion,
-                Notas = alumno.Notas.Select(n => new NotaMateriaViewModel
-                {
-                    Materia = n.Materia.Nombre,
-                    Parcial1 = n.Parcial1,
-                    Parcial2 = n.Parcial2,
-                    NotaFinal = n.NotaFinal
-                }).ToList()
-            };
+            ViewBag.Alumno = alumno;
 
-            // 3) Enviar lista de alumnos y el id seleccionado a la vista
-            ViewBag.Alumnos = alumnos;
-            ViewBag.AlumnoSeleccionadoId = alumnoId;
+            // 6) Cargamos las notas de ese alumno
+            var notas = _context.Notas
+                .Include(n => n.Materia)
+                .Where(n => n.AlumnoId == idAlumno)
+                .OrderBy(n => n.Materia.Nombre)
+                .ToList();
 
-            return View(modelo);
+            return View(notas); // El modelo sigue siendo List<Nota>
         }
     }
 }

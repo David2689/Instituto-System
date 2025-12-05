@@ -4,46 +4,45 @@
     ViewData["Title"] = "Materias";
 }
 
-<div class="container mt-5 mb-5">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="mb-0">Materias</h2>
+<main class="panel-wrapper">
+    <section class="panel-card">
+        <header>
+            <h1 class="panel-title">Materias</h1>
+            <p class="panel-subtitle">
+                Lista de materias registradas en el sistema.
+            </p>
+        </header>
 
-        <div>
-            <a asp-controller="Docente" asp-action="Alumnos" class="btn btn-outline-secondary btn-sm me-2">
+        <div class="panel-actions">
+            <a asp-controller="Docente"
+               asp-action="Alumnos"
+               class="panel-btn panel-btn-outline">
                 ← Volver a alumnos
             </a>
-            <a asp-controller="Docente" asp-action="CrearMateria" class="btn btn-primary btn-sm">
+
+            <a asp-controller="Docente"
+               asp-action="CrearMateria"
+               class="panel-btn panel-btn-primary">
                 + Nueva materia
             </a>
         </div>
-    </div>
 
-    @if (TempData["Mensaje"] != null)
-    {
-        <div class="alert alert-success">
-            @TempData["Mensaje"]
-        </div>
-    }
-
-    <div class="card shadow-sm">
-        <div class="card-body p-0">
-            <table class="table table-striped mb-0">
-                <thead class="table-light">
+        <table class="panel-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    @* Si luego quieres mostrar las U.V., aquí agregas otra columna *@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
                     <tr>
-                        <th>Nombre</th>
-                        <th style="width: 120px;">U.V.</th>
+                        <td>@item.Nombre</td>
+                        @* <td>@item.UV</td>  ← Esto causaba el error *@
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var m in Model)
-                    {
-                        <tr>
-                            <td>@m.Nombre</td>
-                            <td>@m.UnidadesValorativas</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                }
+            </tbody>
+        </table>
+    </section>
+</main>

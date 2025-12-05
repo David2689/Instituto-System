@@ -1,86 +1,85 @@
 ﻿@model WebApplication1.Models.EditarNotasViewModel
 
 @{
-    ViewData["Title"] = "Editar notas del alumno";
+    ViewData["Title"] = "Editar notas";
 }
 
-<div class="container mt-5 mb-5 page-with-header">
-    <h2 class="mb-3">Editar notas del alumno</h2>
+<main class="panel-wrapper">
+    <section class="panel-card">
+        <header>
+            <h1 class="panel-title">Editar notas del alumno</h1>
+            <p class="panel-subtitle">
+                Modifica las notas de cada materia y guarda los cambios.
+            </p>
+        </header>
 
-    <a asp-controller="Docente" asp-action="Alumnos" class="btn btn-link mb-3">
-        ← Volver al listado de alumnos
-    </a>
-
-    @if (TempData["Mensaje"] != null)
-    {
-        <div class="alert alert-success">
-            @TempData["Mensaje"]
-        </div>
-    }
-
-    <!-- Datos del alumno -->
-    <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-            <h4 class="card-title mb-3">@Model.NombreCompleto</h4>
-            <p class="mb-1"><strong>Carne:</strong> @Model.Carne</p>
-            <p class="mb-1"><strong>Grado y sección:</strong> @Model.GradoSeccion</p>
-            <p class="mb-1"><strong>Especialidad:</strong> @Model.Especialidad</p>
-        </div>
-    </div>
-
-    <!-- Formulario de edición de notas -->
-    <form asp-action="EditarNotas" method="post">
-        @Html.AntiForgeryToken()
-
-        <div class="card shadow-sm">
-            <div class="card-header">
-                <strong>Notas por materia</strong>
-            </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-striped mb-0">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Materia</th>
-                                <th class="text-center">Parcial 1</th>
-                                <th class="text-center">Parcial 2</th>
-                                <th class="text-center">Nota final</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @for (int i = 0; i < Model.Notas.Count; i++)
-                            {
-                                <tr>
-                                    <td>
-                                        @* Id oculto SOLO si existe en tu modelo
-                                           <input type="hidden" asp-for="Notas[i].Id" />
-                                        *@
-                                        @Model.Notas[i].Materia
-                                    </td>
-                                    <td class="text-center" style="max-width: 90px;">
-                                        <input asp-for="Notas[i].Parcial1"
-                                               class="form-control form-control-sm text-center" />
-                                    </td>
-                                    <td class="text-center" style="max-width: 90px;">
-                                        <input asp-for="Notas[i].Parcial2"
-                                               class="form-control form-control-sm text-center" />
-                                    </td>
-                                    <td class="text-center" style="max-width: 90px;">
-                                        <input asp-for="Notas[i].NotaFinal"
-                                               class="form-control form-control-sm text-center" />
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div class="panel-actions">
+            <a asp-controller="Docente"
+               asp-action="Alumnos"
+               class="panel-btn panel-btn-outline">
+                ← Volver al listado de alumnos
+            </a>
         </div>
 
-        <div class="mt-3 text-end">
-            <button type="submit" class="btn btn-primary">
+        <div style="margin-bottom: 20px;">
+            <p><strong>Alumno:</strong> @Model.NombreCompleto</p>
+            <p><strong>Carne:</strong> @Model.Carne</p>
+            <p><strong>Especialidad:</strong> @Model.Especialidad</p>
+            <p><strong>Grado / Sección:</strong> @Model.GradoSeccion</p>
+        </div>
+
+        <form asp-action="EditarNotas" method="post">
+            @Html.AntiForgeryToken()
+
+            <!-- MUY IMPORTANTE: enviar el AlumnoId -->
+            <input asp-for="AlumnoId" type="hidden" />
+
+            <table class="panel-table">
+                <thead>
+                    <tr>
+                        <th>Materia</th>
+                        <th>Parcial 1</th>
+                        <th>Parcial 2</th>
+                        <th>Nota final</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Notas.Count; i++)
+                    {
+                        <tr>
+                            <!-- NotaId oculto para cada fila -->
+                            <input asp-for="Notas[i].NotaId" type="hidden" />
+
+                            <td>
+                                @Model.Notas[i].Materia
+                                <input asp-for="Notas[i].Materia" type="hidden" />
+                            </td>
+                            <td>
+                                <input asp-for="Notas[i].Parcial1" class="form-control" />
+                                <span asp-validation-for="Notas[i].Parcial1" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input asp-for="Notas[i].Parcial2" class="form-control" />
+                                <span asp-validation-for="Notas[i].Parcial2" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input asp-for="Notas[i].NotaFinal" class="form-control" />
+                                <span asp-validation-for="Notas[i].NotaFinal" class="text-danger"></span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <button type="submit" class="panel-btn panel-btn-primary" style="margin-top:20px;">
                 Guardar cambios
             </button>
-        </div>
-    </form>
-</div>
+        </form>
+    </section>
+</main>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

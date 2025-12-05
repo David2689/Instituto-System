@@ -26,17 +26,31 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Login(string usuario, string password)
         {
-            // ===== 1) LOGIN DOCENTE FIJO =====
+            // =============== 1) LOGIN ADMIN =================
+            // Ejemplo: usuario: admin  |  contraseña: admin123
+            if (usuario == "admin" && password == "admin123")
+            {
+                HttpContext.Session.SetString("Rol", "Admin");
+                HttpContext.Session.SetString("NombreUsuario", "Administrador INU");
+
+                // Lo mandamos a donde tú quieras que empiece el admin
+                // Ejemplo al panel administrativo:
+                return RedirectToAction("Index", "Admin");
+            }
+
+            // =============== 2) LOGIN DOCENTE ================
+            // Ejemplo: usuario: docente  |  contraseña: admin123
             if (usuario == "docente" && password == "admin123")
             {
                 HttpContext.Session.SetString("Rol", "Docente");
                 HttpContext.Session.SetString("NombreUsuario", "Docente del INU");
 
-                // SIEMPRE REDIRECT DESPUÉS DE POST
+                // Lo mandamos al panel de docente
                 return RedirectToAction("Alumnos", "Docente");
             }
 
-            // ===== 2) LOGIN ALUMNO: CARNÉ + "12345" =====
+            // =============== 3) LOGIN ALUMNO =================
+            // Carné + contraseña fija "12345"
             if (!string.IsNullOrWhiteSpace(usuario))
             {
                 var alumno = _context.Alumnos.FirstOrDefault(a => a.Carne == usuario);
@@ -52,7 +66,7 @@ namespace WebApplication1.Controllers
                 }
             }
 
-            // Si llegó aquí, las credenciales eran malas
+            // =============== 4) SI NADA COINCIDE =============
             ViewBag.Error = "Usuario o contraseña incorrectos.";
             return View();
         }

@@ -1754,5 +1754,310 @@ body {
     .page-with-header {
         margin-top: 140px; /* ajusta si quieres más/menos espacio */
     }
+    /* ===== Estilos para la pantalla de login ===== */
+
+    .login-wrapper {
+        max-width: 480px;
+        margin: 140px auto 80px; /* separa del menú de arriba */
+        padding: 32px 28px;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    }
+
+        .login-wrapper h1 {
+            margin-bottom: 24px;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+    .login-field {
+        margin-bottom: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+        .login-field label {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .login-field input {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+            .login-field input:focus {
+                border-color: #4f46e5; /* un moradito */
+                box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
+            }
+
+    .login-help {
+        display: block;
+        margin-bottom: 12px;
+        font-size: 0.8rem;
+        color: #6b7280;
+    }
+
+    .login-error {
+        color: #dc2626;
+        margin-bottom: 12px;
+        font-weight: 500;
+    }
+
+    .login-btn {
+        display: inline-block;
+        padding: 10px 28px;
+        border-radius: 999px;
+        border: none;
+        background: #2563eb;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+    }
+
+        .login-btn:hover {
+            background: #1d4ed8;
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+            transform: translateY(-1px);
+        }
+    /* Contenedor principal del panel administrativo */
+    .admin-wrapper {
+        margin-top: 110px; /* baja el contenido para que no lo tape el menú fijo */
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 24px 16px 40px;
+        background-color: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.10);
+    }
+
+    /* Encabezado del panel */
+    .admin-header h1 {
+        font-size: 2rem;
+        margin-bottom: 8px;
+    }
+
+    .admin-header p {
+        margin-bottom: 24px;
+        color: #555;
+    }
+
+    /* Botones del panel */
+    .admin-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .admin-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 24px;
+        border-radius: 999px;
+        font-weight: 600;
+        text-decoration: none;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    }
+
+    .admin-btn-primary {
+        background-color: #2563eb;
+        color: #ffffff;
+        box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+    }
+
+        .admin-btn-primary:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(37, 99, 235, 0.35);
+        }
+
+    .admin-btn-secondary {
+        background-color: #10b981;
+        color: #ffffff;
+        box-shadow: 0 10px 20px rgba(16, 185, 129, 0.25);
+    }
+
+        .admin-btn-secondary:hover {
+            background-color: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(16, 185, 129, 0.35);
+        }
+
+    .admin-btn-outline {
+        background-color: transparent;
+        color: #111827;
+        border-color: #9ca3af;
+    }
+
+        .admin-btn-outline:hover {
+            background-color: #f3f4f6;
+            transform: translateY(-2px);
+        }
+    /* ===== PANEL ADMIN / DOCENTE: LAYOUT LIMPIO ===== */
+    .panel-wrapper {
+        margin-top: 110px; /* separa del menú superior */
+        padding: 32px 0 40px 0;
+    }
+
+    .panel-card {
+        max-width: 1150px;
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 28px 36px 32px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Títulos y texto dentro de los paneles */
+    .panel-title {
+        font-size: 26px;
+        font-weight: 700;
+        margin: 0 0 8px;
+    }
+
+    .panel-subtitle {
+        font-size: 14px;
+        color: #555;
+        margin: 0 0 20px;
+    }
+
+    /* Botones dentro del panel */
+    .panel-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .panel-btn {
+        border-radius: 999px;
+        padding: 10px 26px;
+        font-size: 14px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Colores de botones (puedes ajustarlos si quieres) */
+    .panel-btn-primary {
+        background: #2c6bff;
+        color: #fff;
+    }
+
+    .panel-btn-secondary {
+        background: #10c96f;
+        color: #fff;
+    }
+
+    .panel-btn-outline {
+        background: transparent;
+        color: #2c2c4f;
+        border: 2px solid #2c2c4f;
+    }
+
+    /* Tabla de alumnos en panel docente/admin */
+    .panel-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+
+        .panel-table thead th {
+            padding: 10px 8px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid #eee;
+        }
+
+        .panel-table tbody td {
+            padding: 8px 8px;
+            border-bottom: 1px solid #f4f4f4;
+        }
+
+    /* Links de acciones en la tabla */
+    .panel-link {
+        color: #2c6bff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .panel-link + .panel-link::before {
+            content: " | ";
+            color: #999;
+            margin: 0 4px;
+        }
+    /* Panel docente / administración: separa el contenido del menú fijo */
+    .admin-wrapper,
+    .panel-docente-wrapper {
+        margin-top: 110px; /* si aún tapa algo, sube a 120px o 130px */
+    }
+    /* ===== Página de Notas del alumno ===== */
+
+    .notas-wrapper {
+        max-width: 1100px;
+        margin: 180px auto 80px; /* se bajó más */
+        background-color: #ffffff;
+        border-radius: 24px;
+        padding: 50px 50px 60px; /* más espacio interno */
+        box-shadow: 0 25px 50px rgba(15, 23, 42, 0.12);
+        position: relative;
+        z-index: 1; /* evita que tape el header */
+    }
+
+        .notas-wrapper h1 {
+            font-size: 26px;
+            margin-bottom: 12px;
+        }
+
+        .notas-wrapper .datos-alumno {
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+            .notas-wrapper .datos-alumno p {
+                margin: 0 0 4px;
+            }
+
+        /* tabla de notas */
+        .notas-wrapper .tabla-notas {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+            .notas-wrapper .tabla-notas th,
+            .notas-wrapper .tabla-notas td {
+                padding: 8px 10px;
+                border-bottom: 1px solid #eeeeee;
+                text-align: left;
+            }
+
+            .notas-wrapper .tabla-notas th {
+                font-weight: 600;
+            }
+    /* ==== FORZAR QUE EL PANEL DE NOTAS BAJE ==== */
+    .notas-wrapper,
+    .registro-notas-container,
+    .card-notas,
+    #notas-panel {
+        margin-top: 200px !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
 
 }

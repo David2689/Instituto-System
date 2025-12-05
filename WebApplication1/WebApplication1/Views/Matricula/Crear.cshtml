@@ -1,0 +1,209 @@
+﻿@model WebApplication1.Models.Matricula
+@{
+    ViewData["Title"] = "Formulario de inscripción";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/formulario-de-matricula-main/styles/index.css" />
+
+<div id="app">
+    <main>
+        <div class="main-container">
+
+            <!-- BOTÓN ATRÁS -->
+            <div class="back">
+                <img src="~/formulario-de-matricula-main/assets/icons/arrow-left-02.svg" alt="Volver">
+                <span>Atrás</span>
+            </div>
+
+            <h1>Formulario de inscripción</h1>
+            <p>
+                Complete los datos a continuación para inscribir a su hijo en el Instituto Nacional de Usulután.
+            </p>
+
+            <!-- FORMULARIO ASP.NET -->
+            <form asp-action="Crear" asp-controller="Matricula" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+
+                <!-- =====================
+                     DATOS DEL ALUMNO
+                ====================== -->
+                <fieldset class="child-info">
+                    <legend>Información del Alumno</legend>
+
+                    <div class="input-wrapper">
+                        <label asp-for="NombreCompleto"></label>
+                        <input asp-for="NombreCompleto" placeholder="Escribe el nombre completo aquí" />
+                        <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label asp-for="FechaNacimiento">Fecha de Nacimiento</label>
+                        <input asp-for="FechaNacimiento" type="date" />
+                        <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+                    </div>
+
+                    <div class="select-wrapper">
+                        <label asp-for="Sexo">Sexo</label>
+                        <select asp-for="Sexo">
+                            <option value="Femenino">Femenino</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Prefiero no responder">Prefiero no responder</option>
+                        </select>
+                        <span asp-validation-for="Sexo" class="text-danger"></span>
+                    </div>
+
+                    <div class="textarea-wrapper">
+                        <label asp-for="InformacionMedica">Información Médica</label>
+                        <textarea asp-for="InformacionMedica" rows="5" placeholder="Describa si tiene algún problema"></textarea>
+                    </div>
+
+                    <div class="droparea-wrapper">
+                        <label for="cert">Certificado de Noveno Grado</label>
+
+                        <div class="dropzone">
+                            <input type="file" id="cert" name="CertificadoArchivo" />
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <path d="M34.9552 18.0221C34.97 18.022 34.985 18.022 35 18.022C39.9706 18.022 44 22.0588 44 27.0386C44 31.6796 40.5 35.5016 36 36M34.9552 18.0221C34.9848 17.6921 35 17.3579 35 17.0202C35 10.9339 30.0752 6 24 6C18.2465 6 13.5247 10.4253 13.0408 16.0638M34.9552 18.0221C34.7506 20.2952 33.8572 22.3692 32.4856 24.033M13.0408 16.0638C7.96796 16.5475 4 20.8278 4 26.0366C4 30.8834 7.43552 34.9264 12 35.8546M13.0408 16.0638C13.3565 16.0337 13.6765 16.0183 14 16.0183C16.2516 16.0183 18.3295 16.7639 20.001 18.022"
+                                      stroke="#D6D3D1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M24 26V42M24 26C22.5996 26 19.9831 29.9886 19 31M24 26C25.4004 26 28.017 29.9886 29 31"
+                                      stroke="#D6D3D1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p>Click aquí para seleccionar los archivos</p>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+
+                <!-- =====================
+                     DATOS DEL RESPONSABLE
+                ====================== -->
+                <fieldset class="gardian">
+                    <legend>Información del Responsable</legend>
+
+                    <div class="input-wrapper">
+                        <label asp-for="NombreResponsable">Nombre del responsable</label>
+                        <input asp-for="NombreResponsable" />
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label asp-for="Telefono">Número de Teléfono</label>
+                        <input asp-for="Telefono" placeholder="(503) 8765-4321" />
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label asp-for="Email">Email</label>
+                        <input asp-for="Email" type="email" />
+                    </div>
+                </fieldset>
+
+                <!-- =====================
+                     OPCIONES DE MATRÍCULA
+                ====================== -->
+                <fieldset class="enroll-options">
+                    <legend>Opciones de registro</legend>
+
+                    <!-- TURNO -->
+                    <div class="input-wrapper">
+                        <label>Seleccione los horarios de estudio</label>
+
+                        <div class="radio-wrapper">
+
+                            <div class="radio-inner">
+                                <input type="radio" asp-for="Turno" value="Mañana" id="morning">
+                                <label for="morning">Mañana</label>
+                            </div>
+
+                            <div class="radio-inner">
+                                <input type="radio" asp-for="Turno" value="Tarde" id="evening">
+                                <label for="evening">Tarde</label>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ESPECIALIDADES -->
+                    <div class="input-wrapper">
+                        <label>Seleccione la especialidad de su interés</label>
+
+                        <div class="radio-wrapper">
+
+                            <div class="radio-inner">
+                                <input type="radio" asp-for="Especialidad" value="Desarrollo de Software" id="soft">
+                                <label for="soft">Desarrollo de Software</label>
+                            </div>
+
+                            <div class="radio-inner">
+                                <input type="radio" asp-for="Especialidad" value="Atención Primaria en Salud" id="salud">
+                                <label for="salud">Atención Primaria en Salud</label>
+                            </div>
+
+                            <div class="radio-inner">
+                                <input type="radio" asp-for="Especialidad" value="Administrativo Contable" id="cont">
+                                <label for="cont">Administrativo Contable</label>
+                            </div>
+
+                            <div class="radio-inner">
+                                <input type="radio" asp-for="Especialidad" value="Logística y Aduanas" id="log">
+                                <label for="log">Logística y Aduanas</label>
+                            </div>
+
+                            <div class="radio-inner">
+                                <input type="radio" asp-for="Especialidad" value="Bachillerato General" id="bg">
+                                <label for="bg">Bachillerato General</label>
+                            </div>
+
+                            <div class="radio-inner">
+                                <input type="radio" asp-for="Especialidad" value="Música" id="music">
+                                <label for="music">Música</label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <div class="terms-wrapper input-wrapper checkbox-wrapper">
+                    <!-- Cuadrito que pinta el diseño del template -->
+                    <div class="checkbox-image"></div>
+
+                    <!-- Checkbox real (el que valida el navegador) -->
+                    <input type="checkbox" name="terms" id="terms" required />
+
+                    <label for="terms">
+                        Estoy de acuerdo con los <strong>Términos y condiciones</strong> y la
+                        <strong>Política de Privacidad</strong> del Instituto Nacional de Usulután.
+                    </label>
+                </div>
+
+                <div class="actions-wrapper">
+                    <button class="btn-secondary" type="button">Guardar respuestas</button>
+
+                    <button class="btn-primary" type="submit">
+                        Hacer inscripción
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </main>
+
+    <aside>
+        <div class="aside-container">
+            <header>
+                <img src="~/formulario-de-matricula-main/assets/hero-banner.png" alt="Hero Banner">
+                <h2>
+                    Porque cada momento de <span>aprendizaje</span> cuenta
+                </h2>
+                <p>Sera un placer que formes parte de esta gran institución.</p>
+            </header>
+        </div>
+    </aside>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

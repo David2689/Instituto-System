@@ -1,49 +1,62 @@
 ﻿@model WebApplication1.Models.Alumno
 
 @{
-    ViewData["Title"] = "Crear alumno";
+    ViewData["Title"] = "Crear nuevo alumno";
 }
 
-<div class="container mt-5 mb-5">
-    <h2 class="mb-3">Crear nuevo alumno</h2>
+<main class="panel-wrapper">
+    <section class="panel-card">
+        <header>
+            <h1 class="panel-title">Crear nuevo alumno</h1>
+            <p class="panel-subtitle">
+                Completa los datos para registrar un nuevo alumno.
+            </p>
+        </header>
 
-    <a asp-controller="Docente" asp-action="Alumnos" class="btn btn-link mb-3">
-        ← Volver al listado de alumnos
-    </a>
-
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <form asp-action="CrearAlumno" method="post">
-                @Html.AntiForgeryToken()
-
-                <div class="mb-3">
-                    <label asp-for="Carne" class="form-label"></label>
-                    <input asp-for="Carne" class="form-control" />
-                    <span asp-validation-for="Carne" class="text-danger"></span>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="NombreCompleto" class="form-label"></label>
-                    <input asp-for="NombreCompleto" class="form-control" />
-                    <span asp-validation-for="NombreCompleto" class="text-danger"></span>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="Especialidad" class="form-label"></label>
-                    <input asp-for="Especialidad" class="form-control" />
-                    <span asp-validation-for="Especialidad" class="text-danger"></span>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="GradoSeccion" class="form-label"></label>
-                    <input asp-for="GradoSeccion" class="form-control" />
-                    <span asp-validation-for="GradoSeccion" class="text-danger"></span>
-                </div>
-
-                <button type="submit" class="btn btn-success">
-                    Guardar alumno
-                </button>
-            </form>
+        <div class="panel-actions">
+            <a asp-controller="Docente"
+               asp-action="Alumnos"
+               class="panel-btn panel-btn-outline">
+                ← Volver al listado de alumnos
+            </a>
         </div>
-    </div>
-</div>
+
+        <form asp-action="CrearAlumno" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label asp-for="Carne"></label>
+                <input asp-for="Carne" class="form-control" />
+                <span asp-validation-for="Carne" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NombreCompleto"></label>
+                <input asp-for="NombreCompleto" class="form-control" />
+                <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Especialidad"></label>
+                <input asp-for="Especialidad" class="form-control" />
+                <span asp-validation-for="Especialidad" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="GradoSeccion"></label>
+                <input asp-for="GradoSeccion" class="form-control" />
+                <span asp-validation-for="GradoSeccion" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="panel-btn panel-btn-primary">
+                Guardar alumno
+            </button>
+        </form>
+    </section>
+</main>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

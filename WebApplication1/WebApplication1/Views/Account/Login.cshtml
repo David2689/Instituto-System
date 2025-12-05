@@ -1,40 +1,117 @@
 ﻿@{
     ViewData["Title"] = "Inicio de sesión";
+    Layout = "_Layout";
 }
 
-<section class="section" style="padding-top: 140px; padding-bottom: 80px;">
-    <div class="container">
-        <h2 class="h2 section-title mb-4">Inicio de sesión</h2>
+<style>
+    /* ======== ESTILOS SOLO PARA ESTA VISTA DE LOGIN ======== */
 
-        <div style="max-width: 480px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);">
-            <form asp-controller="Account" asp-action="Login" method="post">
-                @Html.AntiForgeryToken()
+    .login-page-wrapper {
+        max-width: 480px;
+        margin: 150px auto 80px; /* baja el formulario para que no lo tape el menú */
+        padding: 32px 28px;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    }
 
-                <div class="mb-3">
-                    <label for="usuario" class="form-label">Usuario / Carné</label>
-                    <input id="usuario" name="usuario" type="text" class="form-control" />
-                </div>
+        .login-page-wrapper h1 {
+            margin-bottom: 24px;
+            font-size: 2rem;
+            font-weight: 700;
+        }
 
-                <div class="mb-3">
-                    <label for="password" class="form-label">Contraseña</label>
-                    <input id="password" name="password" type="password" class="form-control" />
-                </div>
+    .login-field {
+        margin-bottom: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
 
-                <p class="text-muted" style="font-size: 0.9rem;">
-                    <strong>Alumno:</strong> Carné + contraseña <code>12345</code><br />
-                    <strong>Docente:</strong> usuario <code>docente</code> / contraseña <code>admin123</code>
-                </p>
+        .login-field label {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
 
-                @if (ViewBag.Error != null)
-                {
-                    <p style="color:red">@ViewBag.Error</p>
-                }
+        .login-field input {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 0.95rem;
+            outline: none;
+        }
 
-                <button type="submit" class="btn btn-primary">
-                    Entrar
-                </button>
-            </form>
+            .login-field input:focus {
+                border-color: #4f46e5;
+                box-shadow: 0 0 0 2px rgba(79,70,229,0.15);
+            }
+
+    .login-help {
+        display: block;
+        margin-bottom: 12px;
+        font-size: 0.8rem;
+        color: #6b7280;
+    }
+
+    .login-error {
+        color: #dc2626;
+        margin-bottom: 12px;
+        font-weight: 500;
+    }
+
+    .login-btn {
+        display: inline-block;
+        padding: 10px 28px;
+        border-radius: 999px;
+        border: none;
+        background: #2563eb;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+    }
+
+        .login-btn:hover {
+            background: #1d4ed8;
+            box-shadow: 0 6px 16px rgba(37,99,235,0.4);
+            transform: translateY(-1px);
+        }
+</style>
+
+<main class="login-page-wrapper">
+    <h1>Inicio de sesión</h1>
+
+    <form asp-controller="Account" asp-action="Login" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="login-field">
+            <label for="usuario">Usuario / Carné</label>
+            <input id="usuario"
+                   name="usuario"
+                   type="text"
+                   autocomplete="username" />
         </div>
-    </div>
-</section>
-    
+
+        <div class="login-field">
+            <label for="password">Contraseña</label>
+            <input id="password"
+                   name="password"
+                   type="password"
+                   autocomplete="current-password" />
+        </div>
+
+        <small class="login-help">
+            Alumno: Carné + contraseña <strong>12345</strong><br />
+            Docente: usuario <strong>docente</strong> / contraseña <strong>admin123</strong>
+        </small>
+
+        @if (ViewBag.Error != null)
+        {
+            <p class="login-error">@ViewBag.Error</p>
+        }
+
+        <button type="submit" class="login-btn">
+            Entrar
+        </button>
+    </form>
+</main>

@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Panel administrativo";
+}
+
+<div class="admin-wrapper">
+    <div class="admin-header">
+        <h1>Panel administrativo</h1>
+        <p>
+            Desde aquí puedes gestionar la información principal del sistema:
+            alumnos, matrículas y otros apartados.
+        </p>
+    </div>
+
+    <div class="admin-actions">
+        <!-- BOTÓN: Gestión de alumnos -->
+        <a asp-controller="Admin"
+           asp-action="Alumnos"
+           class="admin-btn admin-btn-primary">
+            Gestión de alumnos
+        </a>
+
+        <!-- BOTÓN: Ver matrículas -->
+        <a asp-controller="Matricula"
+           asp-action="Lista"
+           class="admin-btn admin-btn-secondary">
+            Ver matrículas
+        </a>
+
+        <!-- BOTÓN: Volver al inicio -->
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="admin-btn admin-btn-outline">
+            Volver al inicio
+        </a>
+    </div>
+</div>

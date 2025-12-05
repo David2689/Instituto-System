@@ -1,0 +1,75 @@
+﻿@model IEnumerable<WebApplication1.Models.Matricula>
+
+@{
+    ViewData["Title"] = "Listado de matrículas";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/css/matricula-lista.css" />
+
+<main class="matriculas-page">
+    <section class="matriculas-header">
+        <h1>Listado de matrículas</h1>
+        <p>
+            Aquí se muestran todas las inscripciones realizadas desde el formulario de matrícula.
+        </p>
+    </section>
+
+    <section class="matriculas-tabla-wrapper">
+        <table class="matriculas-tabla">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre del alumno</th>
+                    <th>Fecha de nacimiento</th>
+                    <th>Sexo</th>
+                    <th>Responsable</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Turno</th>
+                    <th>Especialidad</th>
+                    <th>Certificado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    var i = 1;
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@item.NombreCompleto</td>
+                            <td>@item.FechaNacimiento.ToString("dd/MM/yyyy")</td>
+                            <td>@item.Sexo</td>
+                            <td>@item.NombreResponsable</td>
+                            <td>@item.Telefono</td>
+                            <td>@item.Email</td>
+                            <td>@item.Turno</td>
+                            <td>@item.Especialidad</td>
+                            <td>
+                                @if (string.IsNullOrEmpty(item.CertificadoRuta))
+                                {
+                                    <span>Sin archivo</span>
+                                }
+                                else
+                                {
+                                    <a href="@item.CertificadoRuta" target="_blank">Ver archivo</a>
+                                }
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="10" class="sin-registros">
+                            No hay matrículas registradas todavía.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+</main>

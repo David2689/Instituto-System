@@ -1,121 +1,91 @@
-﻿@model WebApplication1.Models.AlumnoNotasViewModel
-@using WebApplication1.Models
+﻿@model List<WebApplication1.Models.Nota>
 
 @{
-    ViewData["Title"] = "Apartado de notas";
+    ViewData["Title"] = "Registro de notas del alumno";
 
-    var alumnos = ViewBag.Alumnos as List<Alumno> ?? new List<Alumno>();
-    int alumnoSeleccionadoId = ViewBag.AlumnoSeleccionadoId ?? 0;
+    var alumno = ViewBag.Alumno as WebApplication1.Models.Alumno;
+    var alumnos = ViewBag.Alumnos as IEnumerable<WebApplication1.Models.Alumno>;
+
+    bool esAlumno = ViewBag.EsAlumno != null && (bool)ViewBag.EsAlumno;
 }
 
-<div class="container mt-5 mb-5 page-with-header">
+<div class="notas-wrapper" style="margin-top: 40px;">
+    <h2>Registro de notas del alumno</h2>
 
-    <div class="row mb-4">
-        <div class="col-md-8">
-            <h2 class="mb-2">Registro de notas del alumno</h2>
-            <p class="text-muted mb-1">
-                Aquí se muestran las calificaciones registradas de forma transparente.
-            </p>
+    @* SOLO DOCENTE: selector de alumnos *@
+    @if (!esAlumno && alumnos != null && alumnos.Any())
+    {
+        <form asp-action="Index" method="get" class="mb-3">
+            <label class="form-label">Seleccione el alumno:</label>
+            <select name="idAlumno" class="form-control">
+                @foreach (var a in alumnos)
+                {
+                    if (alumno != null && a.Id == alumno.Id)
+                    {
+                        <option value="@a.Id" selected="selected">
+                            @a.Carne - @a.NombreCompleto
+                        </option>
+                    }
+                    else
+                    {
+                        <option value="@a.Id">
+                            @a.Carne - @a.NombreCompleto
+                        </option>
+                    }
+                }
+            </select>
+
+            <button type="submit" class="btn btn-primary" style="margin-top:10px;">
+                Ver notas
+            </button>
+        </form>
+    }
+
+    @* Datos generales del alumno *@
+    @if (alumno != null)
+    {
+        <div class="mb-3">
+            <p><strong>Nombre:</strong> @alumno.NombreCompleto</p>
+            <p><strong>Carne:</strong> @alumno.Carne</p>
+            <p><strong>Grado y sección:</strong> @alumno.GradoSeccion</p>
+            <p><strong>Especialidad:</strong> @alumno.Especialidad</p>
+            @* Quitamos AnioAcademico porque no existe en el modelo *@
+            @* <p><strong>Año académico:</strong> @alumno.AnioAcademico</p> *@
         </div>
+    }
 
-        <div class="col-md-4 text-md-end text-center">
-            @* Aquí podrías poner un ícono o imagen si quieres *@
-            @* <img src="~/img/4.png" alt="Notas" style="max-height:120px;" /> *@
-        </div>
-    </div>
+    @* Tabla de notas *@
+    <h4>Detalle de notas por materia</h4>
 
-    <!-- Selector de alumno -->
-    <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-            <form asp-controller="Notas" asp-action="Index" method="get" class="row g-3 align-items-end">
-                <div class="col-md-8">
-                    <label for="idAlumno" class="form-label"><strong>Seleccione el alumno:</strong></label>
-                    <select id="idAlumno" name="idAlumno" class="form-select">
-                        @foreach (var a in alumnos)
-                        {
-                            if (a.Id == alumnoSeleccionadoId)
-                            {
-                                <option value="@a.Id" selected>
-                                    @a.Carne - @a.NombreCompleto
-                                </option>
-                            }
-                            else
-                            {
-                                <option value="@a.Id">
-                                    @a.Carne - @a.NombreCompleto
-                                </option>
-                            }
-                        }
-                    </select>
-                </div>
-
-                <div class="col-md-4 text-md-start text-center">
-                    <button type="submit" class="btn btn-primary mt-4">
-                        Ver notas
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Datos del alumno -->
-    <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-            <h4 class="card-title mb-3">@Model.NombreCompleto</h4>
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-1"><strong>Carne:</strong> @Model.Carne</p>
-                    <p class="mb-1"><strong>Grado y sección:</strong> @Model.GradoSeccion</p>
-                </div>
-                <div class="col-md-6">
-                    <p class="mb-1"><strong>Especialidad:</strong> @Model.Especialidad</p>
-                    <p class="mb-1"><strong>Año académico:</strong> 2025</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Tabla de notas -->
-    <div class="card shadow-sm">
-        <div class="card-header">
-            <strong>Detalle de notas por materia</strong>
-        </div>
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-striped mb-0">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Materia</th>
-                            <th class="text-center">Parcial 1</th>
-                            <th class="text-center">Parcial 2</th>
-                            <th class="text-center">Nota Final</th>
-                            <th class="text-center">Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var n in Model.Notas)
-                        {
-                            <tr>
-                                <td>@n.Materia</td>
-                                <td class="text-center">@n.Parcial1</td>
-                                <td class="text-center">@n.Parcial2</td>
-                                <td class="text-center">@n.NotaFinal</td>
-                                <td class="text-center">
-                                    @if (n.Aprobado)
-                                    {
-                                        <span class="badge bg-success">Aprobado</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge bg-danger">Reprobado</span>
-                                    }
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Materia</th>
+                    <th>Parcial 1</th>
+                    <th>Parcial 2</th>
+                    <th>Nota final</th>
+                    @* Quitamos Estado porque no existe en Nota *@
+                    @* <th>Estado</th> *@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var nota in Model)
+                {
+                    <tr>
+                        <td>@nota.Materia?.Nombre</td>
+                        <td>@nota.Parcial1</td>
+                        <td>@nota.Parcial2</td>
+                        <td>@nota.NotaFinal</td>
+                        @* <td>@nota.Estado</td> *@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No hay notas registradas para este alumno.</p>
+    }
 </div>
